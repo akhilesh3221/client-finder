@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+env/
+
+# Database & Secrets
+instance/
+.env
+*.db
+
+# Scraper / Selenium
+chromedriver.exe
+ghostdriver.log
+debug.log
+
+# IDEs
+.vscode/
+.idea/

@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AVA TENDERS | Expert Tender Consultancy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/dist/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a73e8;
+            --accent: #00d4ff;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --gold: #fbbf24;
+            --slate: #64748b;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            background: #0f172a;
+            padding: 15px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--primary);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .logo-text {
+            color: white;
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .logo-text span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--accent);
+        }
+
+        /* Pulse Badge for Live Tenders */
+        .pulse-badge {
+            position: absolute;
+            top: -12px;
+            right: -18px;
+            background: #ef4444;
+            color: white;
+            font-size: 8px;
+            padding: 2px 5px;
+            border-radius: 4px;
+            font-weight: 800;
+            animation: pulse-red 2s infinite;
+        }
+
+        @keyframes pulse-red {
+            0% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+            }
+
+            70% {
+                transform: scale(1);
+                box-shadow: 0 0 0 5px rgba(239, 68, 68, 0);
+            }
+
+            100% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.85)),
+                url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 70vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 0 20px;
+        }
+
+        .hero h2 {
+            color: var(--accent);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 1rem;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            max-width: 800px;
+            margin: 10px 0;
+            font-weight: 800;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #cbd5e1;
+            max-width: 600px;
+            margin-bottom: 30px;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 15px;
+        }
+
+        .cta-button {
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            color: white;
+            padding: 18px 35px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .cta-button.secondary {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 212, 255, 0.3);
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            background: white;
+            padding: 40px;
+            display: flex;
+            justify-content: space-around;
+            width: 80%;
+            margin: -60px auto 50px;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 10;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            display: block;
+        }
+
+        .stat-label {
+            color: var(--slate);
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+        }
+
+        /* Expertise Section */
+        .fields-section {
+            padding: 80px 50px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            font-weight: 800;
+        }
+
+        .fields-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .field-card {
+            background: white;
+            padding: 35px;
+            border-radius: 15px;
+            border: 1px solid #e2e8f0;
+            transition: 0.3s;
+        }
+
+        .field-card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.05);
+            transform: translateY(-5px);
+        }
+
+        .field-card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .field-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .field-list {
+            list-style: none;
+            padding: 0;
+            color: var(--slate);
+            font-size: 0.95rem;
+        }
+
+        .field-list li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .field-list li::before {
+            content: "→";
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 80px 50px 40px;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1.5fr;
+            gap: 50px;
+        }
+
+        .footer-logo .logo-text {
+            font-size: 28px;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .footer-links h3,
+        .footer-contact h3 {
+            color: var(--accent);
+            margin-bottom: 25px;
+            font-size: 1.2rem;
+        }
+
+        .footer-links a {
+            color: #94a3b8;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 12px;
+            transition: 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            color: #94a3b8;
+        }
+
+        .contact-item i {
+            color: var(--accent);
+            font-size: 1.2rem;
+        }
+
+        .copyright {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding-top: 40px;
+            margin-top: 40px;
+            border-top: 1px solid #1e293b;
+            color: #475569;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <a href="/" class="logo-container">
+            <div class="logo-icon">A</div>
+            <span class="logo-text">AVA <span>TENDERS</span></span>
+        </a>
+
+        <div class="nav-links">
+            <a href="/" class="active">🏠 Home</a>
+            <a href="/dashboard">📊 Dashboard</a>
+            <a href="/tenders-dashboard">
+                🔍 Live Tenders
+                <span class="pulse-badge">NEW</span>
+            </a>
+            <a href="/blast-center">🚀 Blast Center</a>
+        </div>
+
+        <div
+            style="color: #475569; font-size: 0.85rem; font-weight: 700; border-left: 1px solid #1e293b; padding-left: 20px;">
+            LUCKY ENTERPRISES
+        </div>
+    </nav>
+
+    <section class="hero">
+        <h2>Expert Tender Consultancy</h2>
+        <h1>Success in Every Bid</h1>
+        <p>Your trusted partner for GeM Portal, IREPS Railways, and PSU Tendering across India.</p>
+        <div class="cta-group">
+            <a href="/tenders-dashboard" class="cta-button">
+                <i class="fas fa-search"></i> Browse Live Tenders
+            </a>
+            <a href="/dashboard" class="cta-button secondary">
+                <i class="fas fa-users"></i> Client Management
+            </a>
+        </div>
+    </section>
+
+    <section class="stats-bar">
+        <div class="stat-item"><span class="stat-number">3+</span><span class="stat-label">Years of GeM Expertise</span>
+        </div>
+        <div class="stat-item"><span class="stat-number">100%</span><span class="stat-label">Compliance Support</span>
+        </div>
+        <div class="stat-item"><span class="stat-number">All India</span><span class="stat-label">Tender Coverage</span>
+        </div>
+    </section>
+
+    <section class="fields-section">
+        <div class="section-title">
+            <h2>Domain Specialization</h2>
+            <p>End-to-end support from bid filing to L1 strategy across multiple sectors.</p>
+        </div>
+
+        <div class="fields-grid">
+            <div class="field-card">
+                <i class="fas fa-industry"></i>
+                <h3>Industrial Supply</h3>
+                <ul class="field-list">
+                    <li>Steel Pipes & TMT Bars</li>
+                    <li>Cement (OPC/PPC)</li>
+                    <li>Hardware & Tools</li>
+                </ul>
+            </div>
+
+            <div class="field-card">
+                <i class="fas fa-bolt"></i>
+                <h3>Energy & Solar</h3>
+                <ul class="field-list">
+                    <li>Solar PV Modules</li>
+                    <li>Electrical Substations</li>
+                    <li>LED Street Lighting</li>
+                </ul>
+            </div>
+
+            <div class="field-card">
+                <i class="fas fa-hospital"></i>
+                <h3>Medical & Healthcare</h3>
+                <ul class="field-list">
+                    <li>Hospital Furniture</li>
+                    <li>Oxygen Plants</li>
+                    <li>Surgical Equipment</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-logo">
+            <span class="logo-text">AVA <span>TENDERS</span></span>
+            <p style="color: #64748b; font-size: 0.95rem;">
+                Empowering Indian manufacturers and contractors with cutting-edge tender intelligence and strategic
+                bidding support.
+            </p>
+        </div>
+
+        <div class="footer-links">
+            <h3>Quick Links</h3>
+            <a href="/dashboard">Client CRM</a>
+            <a href="/tenders-dashboard">Live Bids</a>
+            <a href="/blast-center">Outreach Center</a>
+        </div>
+
+        <div class="footer-contact">
+            <h3>Contact Us</h3>
+            <div class="contact-item"><i class="fas fa-phone"></i><span>+91 89828 79443</span></div>
+            <div class="contact-item"><i class="fas fa-envelope"></i><span>akhilesh2002.2002@gmail.com</span></div>
+            <div class="contact-item"><i class="fas fa-map-marker-alt"></i><span>Gol Chowk, Raipur, Chhattisgarh</span>
+            </div>
+        </div>
+
+        <div class="copyright">
+            &copy; 2026 AVA TENDERS | A Unit of Lucky Enterprises | Designed by Akhilesh Sharma
+        </div>
+    </footer>
+
+</body>
+
+</html>

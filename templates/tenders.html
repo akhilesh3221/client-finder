@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>AVA TENDERS | Live Tender Feed</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/dist/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --brand: #1a73e8;
+            --accent: #00d4ff;
+            --bg: #f8fafc;
+            --dark: #0f172a;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--bg);
+            margin: 0;
+            color: var(--dark);
+        }
+
+        /* Unified Header */
+        header {
+            background: var(--dark);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--brand);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-box {
+            background: white;
+            color: var(--dark);
+            width: 30px;
+            height: 30px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+        }
+
+        .logo-text {
+            color: white;
+            font-size: 20px;
+            font-weight: 800;
+        }
+
+        .logo-text span {
+            color: var(--accent);
+        }
+
+        nav a {
+            color: #94a3b8;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            margin-left: 25px;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        nav a.active,
+        nav a:hover {
+            color: white;
+        }
+
+        .pulse-badge {
+            position: absolute;
+            top: -12px;
+            right: -18px;
+            background: #ef4444;
+            color: white;
+            font-size: 8px;
+            padding: 2px 5px;
+            border-radius: 4px;
+            font-weight: 800;
+            animation: pulse-red 2s infinite;
+        }
+
+        @keyframes pulse-red {
+            0% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+            }
+
+            70% {
+                transform: scale(1);
+                box-shadow: 0 0 0 5px rgba(239, 68, 68, 0);
+            }
+
+            100% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+            }
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 30px auto;
+            padding: 0 40px;
+        }
+
+        /* AUTO-SYNC STATUS BAR */
+        #syncStatus {
+            background: #eff6ff;
+            color: #1e40af;
+            padding: 12px 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            font-weight: 700;
+            display: none;
+            border: 1px solid #bfdbfe;
+        }
+
+        .controls {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+            align-items: center;
+            background: white;
+            padding: 20px;
+            border-radius: 16px;
+            border: 1px solid #e2e8f0;
+        }
+
+        input {
+            flex: 1;
+            padding: 12px 20px;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            outline: none;
+        }
+
+        /* Table Design */
+        .table-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.03);
+            overflow-x: auto;
+            border: 1px solid #e2e8f0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 1300px;
+        }
+
+        th {
+            background: #fafbfc;
+            padding: 16px;
+            text-align: left;
+            font-size: 11px;
+            color: #64748b;
+            text-transform: uppercase;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        td {
+            padding: 16px;
+            border-bottom: 1px solid #f8fafc;
+            font-size: 13px;
+            vertical-align: top;
+        }
+
+        .badge {
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-size: 10px;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .GeM {
+            background: #eff6ff;
+            color: #1e40af;
+        }
+
+        .Railways {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .btn-view {
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 700;
+            transition: 0.2s;
+            display: inline-block;
+        }
+
+        .btn-view:hover {
+            background: var(--dark);
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <a href="/" class="logo-container">
+            <div class="logo-box">A</div>
+            <div class="logo-text">AVA <span>TENDERS</span></div>
+        </a>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/dashboard">Dashboard</a>
+            <a href="/tenders-dashboard" class="active">
+                Live Tenders
+                <span class="pulse-badge">NEW</span>
+            </a>
+            <a href="/blast-center">Blast Center</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div id="syncStatus">
+            <i class="fas fa-sync fa-spin"></i> Background Sync Active: Extracting all pages from GeM/Railways. New data
+            will appear on refresh.
+        </div>
+
+        <div class="controls">
+            <div style="flex: 1;">
+                <h1 style="margin: 0; font-size: 22px;">All India Live Feed</h1>
+                <p style="margin: 0; font-size: 12px; color: #64748b;">Monitoring GeM, Railways, and PSU Portals</p>
+            </div>
+            <input type="text" id="tenderSearch" onkeyup="filterTenders()"
+                placeholder="Search by Department, Product, or Tender No...">
+
+            <button class="btn-view" id="syncBtn" onclick="location.reload()" style="background: white;">
+                <i class="fas fa-redo"></i> Refresh List
+            </button>
+        </div>
+
+        <div class="table-card">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Source</th>
+                        <th>Tender No. & Dept</th>
+                        <th>Description</th>
+                        <th>Financials</th>
+                        <th>Dates</th>
+                        <th style="text-align: right;">Action</th>
+                    </tr>
+                </thead>
+                <tbody id="tenderList">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // Triggered automatically on page visit
+        window.onload = function () {
+            console.log("🚀 Auto-sync triggered...");
+            loadTenders();
+        };
+
+        async function loadTenders() {
+            const list = document.getElementById('tenderList');
+            const syncBar = document.getElementById('syncStatus');
+
+            list.innerHTML = '<tr><td colspan="6" style="text-align:center; padding:50px; color:#64748b;"><i class="fas fa-spinner fa-spin"></i> Loading Database...</td></tr>';
+
+            try {
+                // This GET request now triggers the BackgroundTask in your FastAPI backend
+                const response = await fetch('/api/tenders');
+                const data = await response.json();
+
+                // Show the sync bar because we know the background task is running
+                syncBar.style.display = 'block';
+
+                if (data.length === 0) {
+                    list.innerHTML = '<tr><td colspan="6" style="text-align:center; padding:50px;"><b>Initializing Scraper...</b><br>Please wait 30 seconds and refresh.</td></tr>';
+                    return;
+                }
+
+                let html = '';
+                data.forEach(t => {
+                    html += `
+                        <tr>
+                            <td><span class="badge ${t.source}">${t.source}</span></td>
+                            <td>
+                                <div style="font-weight:800; color:var(--brand);">${t.tender_number}</div>
+                                <div style="font-size:11px; color:#64748b; margin-top:4px;">${t.department}</div>
+                            </td>
+                            <td>
+                                <div style="font-weight:600; line-height:1.4;">${t.tender_name}</div>
+                                <div style="margin-top:5px;"><span style="font-size:10px; background:#f1f5f9; padding:2px 6px; border-radius:4px;">${t.category || 'General'}</span></div>
+                            </td>
+                            <td>
+                                <div style="font-size:11px; color:#64748b;">Est. Cost: <b>${t.estimate_cost || 'Refer Doc'}</b></div>
+                                <div style="font-size:11px; color:#64748b; margin-top:5px;">EMD: <b style="color:#b91c1c;">${t.emd_amount || 'Check Portal'}</b></div>
+                            </td>
+                            <td>
+                                <div style="font-size:11px; color:#64748b;">Published: ${t.publish_date || 'Live'}</div>
+                                <div style="font-size:11px; font-weight:800; color:#d97706; margin-top:5px;">Closes: ${t.last_date || 'Open'}</div>
+                            </td>
+                            <td style="text-align: right;">
+                                <a href="${t.link}" target="_blank" class="btn-view">VIEW BID</a>
+                            </td>
+                        </tr>
+                    `;
+                });
+                list.innerHTML = html;
+            } catch (err) {
+                list.innerHTML = '<tr><td colspan="6" style="text-align:center; padding:50px; color:red;">Error connecting to server. Check your terminal.</td></tr>';
+            }
+        }
+
+        function filterTenders() {
+            let val = document.getElementById("tenderSearch").value.toUpperCase();
+            let rows = document.getElementById("tenderList").rows;
+            for (let i = 0; i < rows.length; i++) {
+                rows[i].style.display = rows[i].innerText.toUpperCase().includes(val) ? "" : "none";
+            }
+        }
+    </script>
+</body>
+
+</html>

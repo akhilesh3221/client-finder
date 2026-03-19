@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AVA TENDERS | Premium CRM Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/dist/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --brand: #1a73e8;
+            --brand-soft: #eff6ff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --border: #e2e8f0;
+            --accent: #00d4ff;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            margin: 0;
+            padding-bottom: 80px;
+        }
+
+        /* Navigation Header */
+        header {
+            background: #0f172a;
+            padding: 12px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid var(--brand);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 20px;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .logo-box {
+            background: white;
+            color: #0f172a;
+            width: 30px;
+            height: 30px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: 800;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+        }
+
+        nav a {
+            color: #94a3b8;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            margin-left: 25px;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: white;
+        }
+
+        .pulse-badge {
+            position: absolute;
+            top: -12px;
+            right: -18px;
+            background: #ef4444;
+            color: white;
+            font-size: 8px;
+            padding: 2px 5px;
+            border-radius: 4px;
+            font-weight: 800;
+            animation: pulse-red 2s infinite;
+        }
+
+        @keyframes pulse-red {
+            0% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+            }
+
+            70% {
+                transform: scale(1);
+                box-shadow: 0 0 0 5px rgba(239, 68, 68, 0);
+            }
+
+            100% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+            }
+        }
+
+        /* Layout Container */
+        .container {
+            max-width: 1550px;
+            margin: 30px auto;
+            padding: 0 40px;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: var(--card);
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+            border: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            font-weight: 800;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: 800;
+            margin-top: 8px;
+        }
+
+        /* Search Controls */
+        .controls-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .search-card {
+            background: var(--card);
+            padding: 20px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .input-group {
+            position: relative;
+            flex: 1;
+        }
+
+        .input-group i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 15px 12px 42px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            font-family: inherit;
+            outline: none;
+        }
+
+        .btn-main {
+            background: var(--brand);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 10px;
+            border: none;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn-main:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        /* Table Styling */
+        .table-card {
+            background: var(--card);
+            border-radius: 20px;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.03);
+            overflow-x: auto;
+            border: 1px solid var(--border);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 1200px;
+        }
+
+        th {
+            background: #fafbfc;
+            padding: 16px;
+            text-align: left;
+            font-size: 11px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            border-bottom: 1px solid var(--border);
+        }
+
+        td {
+            padding: 14px 16px;
+            border-bottom: 1px solid #f8fafc;
+            font-size: 14px;
+        }
+
+        /* Operation Buttons */
+        .ops-wrapper {
+            display: flex;
+            gap: 8px;
+            justify-content: flex-end;
+        }
+
+        .action-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            border-radius: 8px;
+            border: none;
+            font-size: 11px;
+            font-weight: 800;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: 0.2s;
+        }
+
+        .btn-maps {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .btn-chat {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .btn-done {
+            background: #10b981;
+            color: white;
+        }
+
+        .btn-edit {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .btn-del {
+            background: #f1f5f9;
+            color: #334155;
+        }
+
+        .status-badge {
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        .Pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .Done {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        #toast-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 2000;
+        }
+
+        .toast {
+            background: #0f172a;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 10px;
+            margin-top: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <a href="/" class="logo">
+            <div class="logo-box">A</div>
+            AVA <span>TENDERS</span>
+        </a>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/dashboard" class="active">Dashboard</a>
+            <a href="/tenders-dashboard">
+                Live Tenders
+                <span class="pulse-badge">NEW</span>
+            </a>
+            <a href="/blast-center">Blast Center</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">Total Leads</div>
+                <div id="count-leads" class="stat-value" style="color: var(--brand);">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Pending Leads</div>
+                <div id="count-pending" class="stat-value" style="color: #d97706;">0</div>
+            </div>
+            <div class="stat-card" style="border-left: 4px solid var(--accent);">
+                <div class="stat-label">Live Tenders Scraped</div>
+                <div id="count-tenders" class="stat-value" style="color: var(--text-main);">0</div>
+            </div>
+        </div>
+
+        <div class="controls-grid">
+            <div class="search-card">
+                <div class="input-group"><i class="fas fa-search"></i><input type="text" id="prod"
+                        placeholder="Industry/Product (e.g. TMT Bars)"></div>
+                <div class="input-group"><i class="fas fa-map-marker-alt"></i><input type="text" id="loc"
+                        placeholder="City (e.g. Raipur)"></div>
+                <button class="btn-main" onclick="search()">Find Leads</button>
+            </div>
+            <div class="search-card">
+                <div class="input-group"><i class="fas fa-filter"></i><input type="text" id="filterInput"
+                        onkeyup="filter()" placeholder="Quick filter your database..."></div>
+            </div>
+        </div>
+
+        <div class="table-card">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Company Details</th>
+                        <th>City / Address</th>
+                        <th>Phone</th>
+                        <th>Status</th>
+                        <th style="text-align: right;">Operations</th>
+                    </tr>
+                </thead>
+                <tbody id="leadTable"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="toast-container"></div>
+
+    <script>
+        function notify(msg) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.innerHTML = `<i class="fas fa-check-circle"></i> ${msg}`;
+            container.appendChild(toast);
+            setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 500); }, 3000);
+        }
+
+        // Fetch Live Counts from the API
+        function updateStats() {
+            fetch('/api/stats')
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById('count-leads').innerText = data.total_leads;
+                    document.getElementById('count-pending').innerText = data.pending_leads;
+                    document.getElementById('count-tenders').innerText = data.total_tenders;
+                })
+                .catch(err => console.error("Stats fetch error:", err));
+        }
+
+        // Load Lead Data
+        function load() {
+            updateStats();
+            fetch("/vendors").then(res => res.json()).then(data => {
+                let html = "";
+                data.forEach(v => {
+                    const isDone = v.status === 'Done';
+                    html += `
+                        <tr style="${isDone ? 'opacity: 0.6; background: #fafafa;' : ''}">
+                            <td>
+                                <div style="display:flex; align-items:center; gap:12px;">
+                                    <div style="width:38px; height:38px; border-radius:10px; background:var(--brand-soft); color:var(--brand); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:16px;">${v.company.charAt(0)}</div>
+                                    <div><div style="font-weight:700; font-size:15px;">${v.company}</div><small style="color:var(--text-muted)">ID: #${v.id}</small></div>
+                                </div>
+                            </td>
+                            <td style="max-width:300px;">${v.city}</td>
+                            <td><b style="color:var(--brand); font-size:15px;">${v.phone}</b></td>
+                            <td><span class="status-badge ${v.status}">${v.status}</span></td>
+                            <td>
+                                <div class="ops-wrapper">
+                                    <button class="action-btn btn-maps" onclick="window.open('https://www.google.com/maps/search/${encodeURIComponent(v.company + ' ' + v.city)}')">
+                                        <i class="fas fa-location-dot"></i> <span>Maps</span>
+                                    </button>
+                                    <button class="action-btn btn-chat" onclick="window.open('https://wa.me/91${v.phone.replace(/\D/g, '')}?text=Hello%20${encodeURIComponent(v.company)}')">
+                                        <i class="fab fa-whatsapp"></i> <span>Chat</span>
+                                    </button>
+                                    ${!isDone ? `<button class="action-btn btn-done" onclick="mark(${v.id})"><i class="fas fa-check"></i> <span>Done</span></button>` : ''}
+                                    <button class="action-btn btn-edit" onclick="edit(${v.id},'${v.company}','${v.phone}')">
+                                        <i class="fas fa-pen"></i> <span>Edit</span>
+                                    </button>
+                                    <button class="action-btn btn-del" onclick="del(${v.id})">
+                                        <i class="fas fa-trash"></i> <span>Delete</span>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    `;
+                });
+                document.getElementById("leadTable").innerHTML = html;
+            });
+        }
+
+        function filter() {
+            let val = document.getElementById("filterInput").value.toUpperCase(), rows = document.getElementById("leadTable").rows;
+            for (let i = 0; i < rows.length; i++) {
+                rows[i].style.display = rows[i].innerText.toUpperCase().includes(val) ? "" : "none";
+            }
+        }
+
+        function search() {
+            let p = document.getElementById("prod").value, l = document.getElementById("loc").value;
+            if (!p || !l) return notify("Fill product and city fields");
+            notify("Searching Google Maps...");
+            fetch(`/search-clients/?keyword=${encodeURIComponent(p)}&location=${encodeURIComponent(l)}`, { method: "POST" })
+                .then(res => res.json()).then(d => { notify(d.message); load(); });
+        }
+
+        function mark(id) { fetch(`/vendors/${id}/done`, { method: "PUT" }).then(() => { notify("Lead closed"); load(); }); }
+        function del(id) { if (confirm("Delete this lead?")) fetch(`/vendors/${id}`, { method: "DELETE" }).then(() => { notify("Lead deleted"); load(); }); }
+        function edit(id, c, ph) {
+            let nc = prompt("Update Company Name:", c), np = prompt("Update Phone Number:", ph);
+            if (nc && np) fetch(`/vendors/${id}`, { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ company: nc, phone: np }) }).then(() => { notify("Lead updated"); load(); });
+        }
+
+        load();
+    </script>
+</body>
+
+</html>
